@@ -10,7 +10,7 @@
       <img src="https://octodex.github.com/images/spidertocat.png" alt="Spidertocat"
            class="img-responsive center-block" style="width:250px"/>
       <h2 class="text-center">Hello Everyone</h2>
-      <p class="text-center"> jenkins created new practise session by namaan  ... </p>
+      <p class="text-center"> jenkins created new practise session by namaan, made webhook enable   ... </p>
   </div>
 </body>
 </html>
