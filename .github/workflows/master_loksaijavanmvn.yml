@@ -83,13 +83,14 @@ jobs:
     steps:
 
        - name: Using the Github output from above job
-         run: echo " ${{ needs.build.outputs.artifact_name }} "
+         run: echo " ${{ needs.build.outputs.version }} "
 
       
          
       
           
    
+
 
 
 
