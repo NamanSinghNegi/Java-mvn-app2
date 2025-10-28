@@ -1,6 +1,3 @@
-# Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
-# More GitHub Actions for Azure: https://github.com/Azure/actions
-
 name: Test
 
 on:
@@ -11,7 +8,7 @@ on:
         required: true
         default: "Chaman lal dav"
       Department:
-        description:  "Department"
+        description: "Department"
         type: choice
         default: medical
         required: true
@@ -19,7 +16,7 @@ on:
           - Science
           - commerce
           - medical
-      Inermediate:
+      Intermediate:            # fixed spelling (was "Inermediate")
         type: boolean
         required: true
         default: true
@@ -27,34 +24,34 @@ on:
         description: "Enter a number"
         type: number
         required: true
-        
-        
-           
+
 jobs:
   build:
     runs-on: ubuntu-latest
     env:
-      name: 'naman singh negi'
+      name: "naman singh negi"
       roll_number: 12345
       class: "Tenth"
       password: ${{ secrets.PASSWORD }}
+
+    outputs:
+      version: ${{ steps.id_checking.outputs.version }}
 
     steps:
       - uses: actions/checkout@v3
 
       - name: My first Student info
-        run:  echo "Your school name is ${{ inputs.school }} and your Department is ${{ inputs.Department }}, you are in ${{ inputs.Intermediate && '12' || '10' }}"
+        run: echo "Your school name is ${{ inputs.school }} and your Department is ${{ inputs.Department }}, you are in ${{ inputs.Intermediate && '12' || '10' }}"
 
       - name: My env variables print
         run: |
-          echo " your name is  $name  and your roll number is $roll_number  and  class is $class"
+          echo "Your name is $name, roll number is $roll_number, class is $class"
 
-      - name: Printing Github Repo Varibales and Passwords
+      - name: Printing Github Repo Variables and Passwords
         run: |
-          echo " your password is :  $password   and   your  Father name is :  ${{ vars.FATHER_NAME }}"
+          echo "Your password is: $password and your Father name is: ${{ vars.FATHER_NAME }}"
 
-
-      - name: Checking for even and odd using $GITHUV_ENV
+      - name: Checking for even and odd using $GITHUB_ENV
         id: check
         run: |
           num="${{ inputs.number }}"
@@ -67,32 +64,21 @@ jobs:
           fi
 
       - name: Result of even and odd
-        run: echo " Result is ${{ env.result }} "
+        run: echo "Result is ${{ env.result }}"
 
       - name: Checking for $GITHUB_OUTPUT
         id: id_checking
         run: echo "version=1.0.${{ github.run_number }}" >> $GITHUB_OUTPUT
 
       - name: Using the Github OUTPUT in this step
-        run: echo " APP version is ${{ steps.id_checking.outputs.version }}"
+        run: echo "APP version is ${{ steps.id_checking.outputs.version }}"
 
-
+                # 👈 Moved under jobs:
   deploy:
     needs: build
     runs-on: ubuntu-latest
     steps:
       - name: Using the Github output from above job
-        run: echo "Deploying version: ${{ needs.build.outputs.version }} "
-
-      
-         
-      
-          
-   
-
-
-
-
-
-
+        run:  |
+          echo "Deploying version: ${{ needs.build.outputs.version }}"
 
