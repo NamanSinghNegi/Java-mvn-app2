@@ -54,7 +54,7 @@ jobs:
           echo " your password is :  $password   and   your  Father name is :  ${{ vars.FATHER_NAME }}"
 
 
-      - name: Using the Github Output in another step 
+      - name: Checking for even and odd using $GITHUV_ENV
         id: check
         run: |
           num="${{ inputs.number }}"
@@ -68,7 +68,16 @@ jobs:
 
       - name: Result of even and odd
         run: echo " Result is ${{ env.result }} "
+
+      - name: Checking for $GITHUB_OUTPUT
+        id: id_checking
+        run: echo "version=1.0.${{ github.run_number }}" >> $GITHUB_OUTPUT
+
+      - name: Using the Github OUTPUT in this step
+        run: echo " APP version is ${{ steps.id_checking.outputs.version }}"
+          
    
+
 
 
 
