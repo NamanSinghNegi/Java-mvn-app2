@@ -32,11 +32,21 @@ jobs:
       name: 'naman singh negi'
       roll_number: 12345
       class: "Tenth"
+      password: ${{ secrets.PASSWORD }}
 
     steps:
       - uses: actions/checkout@v3
 
-      - name: Your school name
+      - name: My first Student info
         run:  echo "Your school name is ${{ inputs.school }} and your Department is ${{ inputs.Department }}, you are in ${{ inputs.Intermediate && '12' || '10' }}"
 
+      - name: My env variables print
+        run: |
+          echo " your name is  $name  and your roll number is $roll_number  and  class is $class"
+
+      - name: Printing Github Repo Varibales and Passwords
+        run: |
+          echo " your password is :  $password   and   your  Father name is :  ${{ vars.FATHER_NAME }}  "
+
    
+
