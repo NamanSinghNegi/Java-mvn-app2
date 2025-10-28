@@ -81,15 +81,15 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     steps:
-
-       - name: Using the Github output from above job
-         run: echo " ${{ needs.build.outputs.version }} "
+      - name: Using the Github output from above job
+        run: echo "Deploying version: ${{ needs.build.outputs.version }} "
 
       
          
       
           
    
+
 
 
 
