@@ -23,6 +23,11 @@ on:
         type: boolean
         required: true
         default: true
+      number:
+        description: "Enter a number"
+        type: number
+        required: true
+        
         
            
 jobs:
@@ -46,7 +51,23 @@ jobs:
 
       - name: Printing Github Repo Varibales and Passwords
         run: |
-          echo " your password is :  $password   and   your  Father name is :  ${{ vars.FATHER_NAME }}  "
+          echo " your password is :  $password   and   your  Father name is :  ${{ vars.FATHER_NAME }}"
 
+
+      - name: Using the Github Output in another step 
+        id: check
+        run: |
+          num="${{ inputs.number }}"
+          if [ $((num % 2)) -eq 0 ]; then
+            echo "$num is even"
+            echo "result=even" >> $GITHUB_ENV
+          else
+            echo "$num is odd"
+            echo "result=odd" >> $GITHUB_ENV
+          fi
+
+      - name: Result of even and odd
+        run: echo " Result is $env.result "
    
+
 
