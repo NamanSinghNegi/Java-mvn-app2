@@ -24,6 +24,10 @@ on:
         description: "Enter a number"
         type: number
         required: true
+      environment:
+        type: string
+        required: true
+        default: prod
 
 jobs:
   build:
@@ -41,7 +45,8 @@ jobs:
       - uses: actions/checkout@v3
 
       - name: My first Student info
-        run: echo "Your school name is ${{ inputs.school }} and your Department is ${{ inputs.Department }}, you are in ${{ inputs.Intermediate && '12' || '10' }}"
+        run: |
+          echo "Your school name is ${{ inputs.school }} and your Department is ${{ inputs.Department }}, you are in ${{ inputs.Intermediate && '12' || '10' }}"
 
       - name: My env variables print
         run: |
@@ -81,4 +86,10 @@ jobs:
       - name: Using the Github output from above job
         run:  |
           echo "Deploying version: ${{ needs.build.outputs.version }}"
+
+      - name: Calling Resuable workflow
+        uses: NamanSinghNegi/sample-prject/.github/workflows/deploy.yml@dev
+        with:
+          environment: ${{ inputs.environment }}
+
 
