@@ -75,8 +75,22 @@ jobs:
 
       - name: Using the Github OUTPUT in this step
         run: echo " APP version is ${{ steps.id_checking.outputs.version }}"
+
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+
+       - name: Using the Github output from above job
+         run: echo " ${{ needs.build.outputs.artifact_name }} "
+
+      
+         
+      
           
    
+
 
 
 
