@@ -67,7 +67,8 @@ jobs:
           fi
 
       - name: Result of even and odd
-        run: echo " Result is $env.result "
+        run: echo " Result is ${{ env.result }} "
    
+
 
 
