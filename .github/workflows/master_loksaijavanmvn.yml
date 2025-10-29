@@ -28,6 +28,10 @@ on:
         type: string
         required: true
         default: prod
+permissions:
+  contents: read
+  actions: read
+  id-token: write
 
 jobs:
   build:
@@ -97,6 +101,7 @@ jobs:
         with:
           environment: ${{ inputs.environment }}
           version: false
+
 
 
 
