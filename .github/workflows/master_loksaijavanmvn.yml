@@ -91,6 +91,12 @@ jobs:
       - name: Using the Github output from above job
         run: |
           echo "Deploying version: ${{ needs.build.outputs.version }}"
+          
+      - name: Calling Reusable workflow
+        uses: NamanSinghNegi/sample-prject/.github/workflows/reusbale-workflow.yaml@dev
+        with:
+          environment: ${{ inputs.environment }}
+          version: false
 
 
 
