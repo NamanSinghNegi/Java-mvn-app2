@@ -48,6 +48,12 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
+      - name: Calling Reusable workflow
+        uses: NamanSinghNegi/sample-prject/.github/workflows/resuable-workflow.yaml@dev
+        with:
+          environment: ${{ inputs.environment }}
+          version: false
+
       - name: My first Student info
         shell: bash
         run: |
@@ -92,18 +98,16 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     steps:
+
+
+
       - name: Using the Github output from above job
         run: |
           echo "Deploying version: ${{ needs.build.outputs.version }}"
           
-      - name: Calling Reusable workflow
-        uses: NamanSinghNegi/sample-prject/.github/workflows/resuable-workflow.yaml@dev
-        with:
-          environment: ${{ inputs.environment }}
-          version: false
-        secrets: 
-          token: ${{ secrets.TOKEN }}
+
           
+
 
 
 
