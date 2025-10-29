@@ -101,6 +101,10 @@ jobs:
         with:
           environment: ${{ inputs.environment }}
           version: false
+        secrets: 
+          token: ${{ secrets.TOKEN }}
+          
+
 
 
 
