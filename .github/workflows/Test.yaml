@@ -24,10 +24,11 @@ on:
         description: "Enter a number"
         type: number
         required: true
-      environment :
+      environment:
         type: string
         required: true
         default: prod
+
 permissions:
   contents: read
   actions: read
@@ -47,12 +48,6 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
-
-      - name: Calling Reusable workflow
-        uses: NamanSinghNegi/sample-prject/.github/workflows/resuable-workflow.yaml@dev
-        with:
-          environment: ${{ inputs.environment }}
-          version: false
 
       - name: My first Student info
         shell: bash
@@ -96,24 +91,9 @@ jobs:
 
   deploy:
     needs: build
-    runs-on: ubuntu-latest
-    steps:
-
-
-
-      - name: Using the Github output from above job
-        run: |
-          echo "Deploying version: ${{ needs.build.outputs.version }}"
-          
-
-          
-
-
-
-
-
-
-
-
-
-
+    uses: NamanSinghNegi/sample-prject/.github/workflows/resuable-workflow.yaml@dev
+    with:
+      environment: ${{ inputs.environment }}
+      version: false
+    secrets:
+      token: ${{ secrets.TOKEN }}
