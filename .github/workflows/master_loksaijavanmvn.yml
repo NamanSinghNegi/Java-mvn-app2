@@ -24,7 +24,7 @@ on:
         description: "Enter a number"
         type: number
         required: true
-      environment:
+      environment :
         type: string
         required: true
         default: prod
@@ -96,3 +96,4 @@ jobs:
         uses: NamanSinghNegi/sample-prject/.github/workflows/reusbale-workflow.yaml@dev
         with:
           environment: ${{ inputs.environment }}
+
