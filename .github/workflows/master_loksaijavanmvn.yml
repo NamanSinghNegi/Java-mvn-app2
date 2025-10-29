@@ -16,7 +16,7 @@ on:
           - Science
           - commerce
           - medical
-      Intermediate:            # fixed spelling (was "Inermediate")
+      Intermediate:
         type: boolean
         required: true
         default: true
@@ -45,8 +45,14 @@ jobs:
       - uses: actions/checkout@v3
 
       - name: My first Student info
+        shell: bash
         run: |
-          echo "Your school name is ${{ inputs.school }} and your Department is ${{ inputs.Department }}, you are in ${{ inputs.Intermediate && '12' || '10' }}"
+          if [ "${{ inputs.Intermediate }}" = "true" ]; then
+            std_class="12"
+          else
+            std_class="10"
+          fi
+          echo "Your school name is ${{ inputs.school }} and your Department is ${{ inputs.Department }}, you are in class $std_class"
 
       - name: My env variables print
         run: |
@@ -59,7 +65,7 @@ jobs:
       - name: Checking for even and odd using $GITHUB_ENV
         id: check
         run: |
-          num="${{ inputs.number }}"
+          num=${{ inputs.number }}
           if [ $((num % 2)) -eq 0 ]; then
             echo "$num is even"
             echo "result=even" >> $GITHUB_ENV
@@ -78,19 +84,15 @@ jobs:
       - name: Using the Github OUTPUT in this step
         run: echo "APP version is ${{ steps.id_checking.outputs.version }}"
 
-                # 👈 Moved under jobs:
   deploy:
     needs: build
     runs-on: ubuntu-latest
     steps:
       - name: Using the Github output from above job
-        run:  |
+        run: |
           echo "Deploying version: ${{ needs.build.outputs.version }}"
 
-      - name: Calling Resuable workflow
+      - name: Calling Reusable workflow
         uses: NamanSinghNegi/sample-prject/.github/workflows/reusbale-workflow.yaml@dev
         with:
           environment: ${{ inputs.environment }}
-
-
-
